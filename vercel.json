@@ -7,7 +7,7 @@
   "devCommand": "npm run dev",
   "functions": {
     "dist/server/index.js": {
-      "runtime": "@vercel/node@18",
+      "runtime": "nodejs18.x",
       "maxDuration": 10,
       "includeFiles": "shared/**"
     }

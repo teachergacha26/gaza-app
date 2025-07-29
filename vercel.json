@@ -7,9 +7,9 @@
   "devCommand": "npm run dev",
   "functions": {
     "dist/server/index.js": {
-      "runtime": "@vercel/node",
+      "runtime": "@vercel/node@18",
       "maxDuration": 10,
-      "includeFiles": "shared/**"
+      "includeFiles": ["shared/**"]
     }
   },
   "routes": [

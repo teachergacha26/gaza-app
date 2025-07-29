@@ -8,6 +8,17 @@ This is a full-stack web application that connects donors with verified charitab
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (July 29, 2025)
+
+✓ Fixed all LSP diagnostics and technical issues
+✓ Updated MATW Project with correct mosque icon for Muslim organization
+✓ Removed search functionality and quick donation section as requested
+✓ Added Islamic Relief Worldwide to verified organizations list
+✓ Configured for Vercel deployment with proper framework detection
+✓ Created deployment guide and environment configuration
+✓ Verified build process works correctly (frontend + backend bundle)
+✓ Dark theme successfully implemented throughout the app
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -75,14 +86,16 @@ Preferred communication style: Simple, everyday language.
 ## Deployment Strategy
 
 ### Production Deployment (Vercel)
-- **Platform**: Vercel with custom build configuration
+- **Platform**: Vercel with React framework detection
+- **Node Version**: 18.x (configured for Vercel compatibility)
 - **Build Process**: 
   - Frontend: Vite build to `dist/public`
   - Backend: esbuild bundle to `dist/index.js`
 - **Routing Strategy**:
-  - API routes (`/api/*`) → serverless function
-  - Static routes (`/*`) → static files
+  - API routes (`/api/*`) → serverless function at `/server/index.ts`
+  - Static routes (`/*`) → static files in `/dist/public`
 - **Environment**: Node.js serverless functions with 10-second timeout
+- **Framework Detection**: Set to "react" in vercel.json for proper deployment
 
 ### Development Environment
 - **Hot Reload**: Vite dev server with HMR

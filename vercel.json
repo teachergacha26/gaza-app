@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "framework": null,
+  "framework": "react",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "installCommand": "npm ci",
@@ -12,13 +12,6 @@
       "config": {
         "includeFiles": ["shared/**", "server/**"]
       }
-    },
-    {
-      "src": "client/**",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
     }
   ],
   "routes": [
@@ -28,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/$1"
+      "dest": "/dist/public/$1"
     }
   ],
   "functions": {

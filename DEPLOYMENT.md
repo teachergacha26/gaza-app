@@ -36,17 +36,32 @@ The build process handles:
 
 ## Troubleshooting Common Issues
 
-### Build Fails
+### 1. Vercel Functions vs Builds Conflict ✅ FIXED
+**Error**: "The functions property cannot be used in conjunction with the builds property"
+**Solution**: The vercel.json has been corrected to use only `functions` property (modern approach)
+- ✅ Removed conflicting `builds` section
+- ✅ Updated `functions` with proper runtime configuration
+- ✅ Maintained proper routing for API and static files
+
+### 2. Build Fails
 - Ensure all dependencies are in `dependencies` (not devDependencies) if needed in production
 - Check build logs for specific error messages
+- Verify Node.js version compatibility (18.x recommended)
 
-### API Routes Not Working
+### 3. API Routes Not Working
 - Verify API routes start with `/api/`
 - Check serverless function logs in Vercel dashboard
+- Ensure `server/index.ts` is properly configured
 
-### Static Files Not Loading
+### 4. Static Files Not Loading
 - Confirm output directory is set to `dist/public`
 - Verify build command completes successfully
+- Check routing configuration in vercel.json
+
+### 5. Environment Variables Missing
+- Go to Vercel → Project → Settings → Environment Variables
+- Add any required variables from `.env.example`
+- **Security Note**: Set `IP_SALT` for production deployment
 
 ## Testing Deployment
 1. Build locally: `npm run build`

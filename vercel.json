@@ -1,17 +1,25 @@
 {
   "version": 2,
+  "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "installCommand": "npm ci",
+  "devCommand": "npm run dev",
   "functions": {
-    "api/index.js": {
+    "dist/server/index.js": {
       "runtime": "nodejs18.x",
       "maxDuration": 10,
       "includeFiles": "shared/**"
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/(.*)", "dest": "/dist/public/$1" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/dist/server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/public/$1"
+    }
   ]
 }

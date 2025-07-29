@@ -1,15 +1,35 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { SecurityManager } from "./security";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Military-grade security implementation
+app.set('trust proxy', 1); // Trust first proxy (Vercel)
+app.use(SecurityManager.securityHeadersMiddleware);
+app.use(SecurityManager.corsMiddleware);
+// Adjust rate limiting based on environment
+const maxRequests = process.env.NODE_ENV === 'development' ? 1000 : 50;
+app.use(SecurityManager.rateLimitMiddleware(maxRequests, 15 * 60 * 1000));
+app.use(SecurityManager.antiBotMiddleware);
+app.use(SecurityManager.requestLoggerMiddleware);
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
+
+  // Sanitize all incoming data for security
+  if (req.body) {
+    req.body = SecurityManager.sanitizeInput(req.body);
+  }
+  if (req.query) {
+    req.query = SecurityManager.sanitizeInput(req.query);
+  }
 
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {

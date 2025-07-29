@@ -46,7 +46,7 @@ export class MemStorage implements IStorage {
         category: "Muslim Charity Organization",
         founded: null,
         specialization: "Essential Aid & Medical Supplies",
-        iconColor: "bg-yellow-500",
+        iconColor: "bg-white",
         iconType: "fas fa-mosque",
         verified: true,
       },

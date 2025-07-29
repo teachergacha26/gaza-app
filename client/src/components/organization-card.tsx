@@ -1,4 +1,4 @@
-import { ExternalLink, Globe, Phone, Mail, MapPin, Calendar, Users, Tag, Building, Stethoscope, Coins, Flag, Heart, CloudMoon, Church, HandHelping, Banknote } from "lucide-react";
+import { ExternalLink, Globe, Phone, Mail, MapPin, Calendar, Users, Tag, Building, Stethoscope, Coins, Flag, Heart, CloudMoon, Building2, HandHelping, Banknote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ const getIconComponent = (iconType: string) => {
     case "fas fa-crescent-moon":
       return CloudMoon;
     case "fas fa-mosque":
-      return Church;
+      return Building2; // Proper mosque representation
     case "fas fa-coins":
       return Coins;
     case "fas fa-flag":
@@ -31,6 +31,8 @@ const getColorClasses = (iconColor: string) => {
   switch (iconColor) {
     case "bg-islamic-green-500":
       return "bg-green-500";
+    case "bg-white":
+      return "bg-white";
     case "bg-yellow-500":
       return "bg-yellow-500";
     case "bg-orange-500":
@@ -50,6 +52,8 @@ const getButtonColorClasses = (iconColor: string) => {
   switch (iconColor) {
     case "bg-islamic-green-500":
       return "bg-green-500 hover:bg-green-600";
+    case "bg-white":
+      return "bg-white hover:bg-gray-100 text-slate-900";
     case "bg-yellow-500":
       return "bg-yellow-500 hover:bg-yellow-600 text-slate-900";
     case "bg-orange-500":
@@ -69,6 +73,8 @@ const getBorderColorClasses = (iconColor: string) => {
   switch (iconColor) {
     case "bg-islamic-green-500":
       return "border-green-500 text-green-400 hover:text-green-400";
+    case "bg-white":
+      return "border-white text-white hover:text-white";
     case "bg-yellow-500":
       return "border-yellow-400 text-yellow-400 hover:text-yellow-400";
     case "bg-orange-500":
@@ -94,8 +100,8 @@ export default function OrganizationCard({ organization }: OrganizationCardProps
     <Card className="bg-slate-800 border-slate-700 hover:border-green-500 transition-all duration-300 group">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <div className={`w-12 h-12 ${iconColorClass} rounded-lg flex items-center justify-center`}>
-            <IconComponent className="text-white w-6 h-6" />
+          <div className={`w-12 h-12 ${iconColorClass} rounded-lg flex items-center justify-center border ${organization.iconColor === 'bg-white' ? 'border-slate-600' : ''}`}>
+            <IconComponent className={`w-6 h-6 ${organization.iconColor === 'bg-white' ? 'text-slate-900' : 'text-white'}`} />
           </div>
           <Badge variant="outline" className="border-green-500 text-green-500">
             VERIFIED

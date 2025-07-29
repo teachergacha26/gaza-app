@@ -9,7 +9,7 @@
     "dist/server/index.js": {
       "runtime": "@vercel/node",
       "maxDuration": 10,
-      "includeFiles": ["shared/**", "server/**"]
+      "includeFiles": "shared/**"
     }
   },
   "routes": [
